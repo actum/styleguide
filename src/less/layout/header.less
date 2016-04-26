@@ -1,0 +1,103 @@
+.kss_u-sg-style {
+    .kss_ {
+        &header {
+            position: fixed;
+            top: 0;
+            width: calc(100% ~'-' 30px);
+            padding: 0 15px;
+            background: #333;
+            box-shadow: 0 0 6px #444;
+
+            &__container {
+                display: flex;
+                justify-content: space-between;
+                max-width: 1440px;
+                margin: 0 auto;
+            }
+
+            &__title {
+                display: inline-block;
+                line-height: 42px;
+                margin: 0;
+                font-size: 18px;
+            }
+
+            &__title-link {
+                color: aquamarine;
+                text-decoration: none;
+            }
+
+            &__item {
+                display: inline-block;
+            }
+
+            &__link,
+            &__btn {
+                padding: 13px 5px;
+                border: 0;
+                background: none;
+                color: #ccc;
+                font-size: 14px;
+                cursor: pointer;
+                opacity: .7;
+                transition: opacity 250ms;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+
+            &__link {
+                line-height: 42px;
+                text-decoration: none;
+            }
+
+            &__btn {
+                &.is-active {
+                    color: #fff;
+                    opacity: 1;
+                }
+            }
+        }
+
+        &nav {
+            display: inline-block;
+            margin: 0;
+            padding-left: 0;
+            list-style: none;
+
+            &__item {
+                position: relative;
+                display: inline-block;
+
+                &:hover .kss_nav__submenu {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+
+            &__submenu {
+                position: absolute;
+                top: 42px;
+                left: -10px;
+                background: #333;
+                border-bottom: 1px solid #000;
+                box-shadow: 1px 1px 6px -1px #444;
+                visibility: hidden;
+                transition: opacity 250ms ease-in;
+                opacity: 0;
+            }
+
+            &__submenu-item,
+            &__submenu-link {
+                display: block;
+            }
+
+            &__submenu-link {
+                padding: 8px 16px 10px;
+                line-height: 1;
+                white-space: nowrap;
+            }
+        }
+    }
+}

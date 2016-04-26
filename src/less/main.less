@@ -1,0 +1,187 @@
+@screen-md-min: 1024px;
+
+body {
+    margin: 0;
+    background: aquamarine;
+}
+
+.kss_ {
+    &u-container {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    &main {
+        height: calc(100vh ~'-' 42px);
+    }
+
+    &content {
+        display: block;
+        width: 100%;
+        height: 100%;
+        margin: 42px auto 0;
+        border: 0;
+        transition: width 300ms ease-out;
+    }
+
+    &iframe {
+        background: #fff;
+    }
+
+    &section {
+        padding-top: 30px;
+    }
+
+    &example {
+        margin-bottom: 20px;
+    }
+
+    &modifier {
+        &__name,
+        &__description {
+            display: inline-block;
+        }
+    }
+
+    &markup {
+        margin: 0 15px;
+
+        &__btn {
+            padding: 5px 15px;
+            border: 0;
+            background: #f5f2f0;
+            font-size: 14px;
+            transition: color 200ms ease-out;
+
+            &:hover {
+                color: #000;
+            }
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        &__wrapper {
+            height: 0;
+            overflow: hidden;
+            font-size: 14px;
+            transition: height 300ms ease-out;
+        }
+
+        &__pre {
+            margin-top: 0 !important;
+        }
+
+        @media (min-width: @screen-md-min) {
+            margin: 0 50px;
+        }
+    }
+
+    &sg-color {
+        padding: 10px;
+        text-align: center;
+
+        &__name {
+            padding: 5px 10px;
+            border-radius: 10px;
+            background: rgba(0,0,0,.5);
+            color: rgba(255,255,255,.5);
+        }
+    }
+
+    &u-sg-style {
+        @import (less) '../../node_modules/css-reset-and-normalize/css/reset-and-normalize.css';
+
+        &,
+        button {
+            font-family: Consolas, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+
+        &,
+        a {
+            color: #444;
+        }
+
+        a {
+            &:hover {
+                color: #444;
+            }
+        }
+
+        button {
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+
+        .kss_ {
+            &title,
+            &description,
+            &modifier,
+            &markup {
+                margin: 0 15px;
+
+                @media (min-width: @screen-md-min) {
+                    margin: 0 50px;
+                }
+            }
+
+            &title {
+                margin-bottom: 5px;
+                line-height: 1;
+
+                &__permalink {
+                    position: relative;
+
+                    &:before {
+                        content: '$';
+                        position: absolute;
+                        left: -10px;
+                        display: block;
+                        width: 10px;
+                        font-size: 16px;
+                        color: #888;
+                        opacity: 0;
+                        transform: translate(-5px);
+                        transition: 200ms ease-out;
+                    }
+
+                    &:hover {
+                        text-decoration: none;
+
+                        &:before {
+                            opacity: 1;
+                            transform: translate(0);
+                        }
+                    }
+                }
+
+                &__ref {
+                    display: block;
+                    font-size: 16px;
+                    color: #888;
+                }
+            }
+
+            &description {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+
+@import 'layout/*';
+@import 'components/*';

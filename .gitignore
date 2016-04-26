@@ -1,0 +1,15 @@
+*.sublime-*
+
+# npm
+/node_modules
+npm-debug.log
+
+# app
+/src/css
+/src/js
+/src/gfx/icon
+/src/*.html
+
+# dist
+/dist
+/styleguide
