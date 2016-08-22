@@ -4,8 +4,7 @@
   "description": "The default template for kss-node.",
   "main": "template_config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "less": "./node_modules/.bin/lessc --verbose --compress public/kss.less public/kss.css"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "less": "^2.1.1"

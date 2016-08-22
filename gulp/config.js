@@ -20,7 +20,15 @@ export default {
                 entry: './src/gfx/svg/*.svg',
                 dest: './src/gfx/icon'
             },
-            html: './src/*.hbs'
+            html: './src/*.hbs',
+            kss: {
+                generator: [
+                    './src/custom_kss_handlebars_generator.js',
+                    './src/package.json',
+                    './src/template_config.js'
+                ],
+                js: './src/public/kss.js'
+            }
         },
         dist: {
             base: './dist',

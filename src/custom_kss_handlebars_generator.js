@@ -1,5 +1,5 @@
 // Remove after https://github.com/Constellation/doctrine/issues/100 is fixed.
-/*eslint-disable valid-jsdoc*/
+/* eslint-disable valid-jsdoc */
 
 'use strict';
 
@@ -15,42 +15,58 @@
 var KssGenerator = require('../node_modules/kss/generator/kss_generator.js'),
   KssSection = require('../node_modules/kss/lib/kss_section.js'),
   fs = require('fs'),
+  fse = require('fs-extra'),
   glob = require('glob'),
   marked = require('marked'),
   path = require('path'),
-  wrench = require('wrench');
+  wrench = require('wrench'),
+  mkdirp = require('mkdirp');
 
 // Pass a string to KssGenerator() to tell the system which API version is
 // implemented by kssHandlebarsGenerator.
-var kssHandlebarsGenerator = new KssGenerator('2.0', {
-  'helpers': {
+var kssHandlebarsGenerator = new KssGenerator('2.1', {
+  helpers: {
+    group: 'Style guide:',
     string: true,
     path: true,
     describe: 'Location of custom handlebars helpers; see http://bit.ly/kss-wiki'
   },
-  'homepage': {
+  homepage: {
+    group: 'Style guide:',
     string: true,
     multiple: false,
     describe: 'File name of the homepage\'s Markdown file',
     default: 'styleguide.md'
   },
-  'placeholder': {
+  placeholder: {
+    group: 'Style guide:',
     string: true,
     multiple: false,
     describe: 'Placeholder text to use for modifier classes',
     default: '[modifier class]'
   },
-  'markupBefore': {
-    string: true,
+  'nav-depth': {
+    group: 'Style guide:',
     multiple: false,
-    describe: 'Markup wrapper',
-    default: ''
+    describe: 'Limit the navigation to the depth specified',
+    default: 3
   },
-  'markupAfter': {
+  markupBefore: {
     string: true,
     multiple: false,
     describe: 'Markup wrapper',
-    default: ''
+    default: '<div class="container">'
+  },
+  markupAfter: {
+    string: true,
+    multiple: false,
+    describe: 'Markup wrapper',
+    default: '</div>'
+  },
+  copyCss: {
+    multiple: false,
+    describe: 'Copy static CSS file into styleguide destination public folder',
+    default: false
   }
 });
 
@@ -62,28 +78,42 @@ var kssHandlebarsGenerator = new KssGenerator('2.0', {
  * any necessary tasks before the KSS parsing of the source files.
  *
  * @alias module:kss/generator/handlebars.init
- * @param {Object} config Configuration object for the style guide generation.
+ * @param {Object} config Configuration object for the requested generation.
+ * @param {Function} cb Callback that will be given an Error as its first
+ *                      parameter, if one occurs.
+ * @returns {*} The callback's return value.
  */
-kssHandlebarsGenerator.init = function(config) {
+kssHandlebarsGenerator.init = function(config, cb) {
   var i, j, helper;
+
+  cb = cb || /* istanbul ignore next */ function() {};
 
   // Save the configuration parameters.
   this.config = config;
+  this.config.helpers = this.config.helpers || [];
 
-  console.log('');
-  console.log('Generating your KSS style guide!');
-  console.log('');
-  console.log(' * KSS Source  : ' + this.config.source.join(', '));
-  console.log(' * Destination : ' + this.config.destination);
-  console.log(' * Template    : ' + this.config.template);
-  if (this.config.helpers) {
-    console.log(' * Helpers     : ' + this.config.helpers.join(', '));
+  // Store the global Handlebars object.
+  this.Handlebars = require('handlebars');
+
+  // Load the standard Handlebars helpers.
+  require('../node_modules/kss/generator/handlebars/helpers.js').register(this.Handlebars, this.config);
+
+  if (this.config.verbose) {
+    this.log('');
+    this.log('Generating your KSS style guide!');
+    this.log('');
+    this.log(' * KSS Source  : ' + this.config.source.join(', '));
+    this.log(' * Destination : ' + this.config.destination);
+    this.log(' * Template    : ' + this.config.template);
+    if (this.config.helpers.length) {
+      this.log(' * Helpers     : ' + this.config.helpers.join(', '));
+    }
+    this.log('');
   }
-  console.log('');
 
   // Create a new destination directory.
   try {
-    fs.mkdirSync(this.config.destination);
+    mkdirp.sync(this.config.destination + '/public');
   } catch (e) {
     // empty
   }
@@ -102,18 +132,20 @@ kssHandlebarsGenerator.init = function(config) {
     // empty
   }
 
-  // Ensure a "public" folder exists.
-  try {
-    fs.mkdirSync(this.config.destination + '/public');
-  } catch (e) {
-    // empty
+  // Optionally, copy the css files to the template's "public" folder.
+  if (this.config.copyCss) {
+    try {
+      fse.copy(
+        path.join(this.config.destination, this.config.css[0]),
+        this.config.destination + '/public/css/' + path.basename(this.config.css[0]),
+        {
+          clobber: true
+        }
+      );
+    } catch (e) {
+      // empty
+    }
   }
-
-  // Store the global Handlebars object.
-  this.Handlebars = require('handlebars');
-
-  // Load the standard Handlebars helpers.
-  require('../node_modules/kss/generator/handlebars/helpers.js').register(this.Handlebars, this.config);
 
   // Load Handlebars helpers.
   if (this.config.helpers.length > 0) {
@@ -135,10 +167,12 @@ kssHandlebarsGenerator.init = function(config) {
   }
 
   // Compile the Handlebars template.
-  this.template = fs.readFileSync(this.config.template + '/index.html', 'utf8');
-  this.templateIframe = fs.readFileSync(this.config.template + '/iframe.html', 'utf8');
+  this.template = fs.readFileSync(this.config.template + '/index.hbs', 'utf8');
+  this.templateIframe = fs.readFileSync(this.config.template + '/iframe.hbs', 'utf8');
   this.template = this.Handlebars.compile(this.template);
   this.templateIframe = this.Handlebars.compile(this.templateIframe);
+
+  return cb(null);
 };
 
 /**
@@ -147,7 +181,7 @@ kssHandlebarsGenerator.init = function(config) {
  * @alias module:kss/generator/handlebars.generate
  * @param {KssStyleguide} styleguide The KSS style guide in object format.
  */
-kssHandlebarsGenerator.generate = function(styleguide) {
+kssHandlebarsGenerator.generate = function(styleguide, cb) {
   var sections = styleguide.section(),
     sectionCount = sections.length,
     sectionRoots = [],
@@ -160,16 +194,22 @@ kssHandlebarsGenerator.generate = function(styleguide) {
     i,
     key;
 
-  console.log(styleguide.data.files.map(function(file) {
-    return ' - ' + file;
-  }).join('\n'));
+  cb = cb || /* istanbul ignore next */ function() {};
 
-  // Throw an error if no KSS sections are found in the source files.
-  if (sectionCount === 0) {
-    throw new Error('No KSS documentation discovered in source files.');
+  if (this.config.verbose) {
+    this.log(styleguide.data.files.map(function(file) {
+      return ' - ' + file;
+    }).join('\n'));
   }
 
-  console.log('...Determining section markup:');
+  // Return an error if no KSS sections are found in the source files.
+  if (sectionCount === 0) {
+    return cb(Error('No KSS documentation discovered in source files.'));
+  }
+
+  if (this.config.verbose) {
+    this.log('...Determining section markup:');
+  }
 
   for (i = 0; i < sectionCount; i += 1) {
     // Register all the markup blocks as Handlebars partials.
@@ -194,8 +234,13 @@ kssHandlebarsGenerator.generate = function(styleguide) {
         // If the markup file is not found, note that in the style guide.
         if (!files.length) {
           partial.markup += ' NOT FOUND!';
+          if (!this.config.verbose) {
+            this.log('WARNING: In section ' + partial.reference + ', ' + partial.markup);
+          }
         }
-        console.log(' - ' + partial.reference + ': ' + partial.markup);
+        if (this.config.verbose) {
+          this.log(' - ' + partial.reference + ': ' + partial.markup);
+        }
         if (files.length) {
           // Load the partial's markup from file.
           partial.file = files[0];
@@ -209,8 +254,8 @@ kssHandlebarsGenerator.generate = function(styleguide) {
             }
           }
         }
-      } else {
-        console.log(' - ' + partial.reference + ': inline markup');
+      } else if (this.config.verbose) {
+        this.log(' - ' + partial.reference + ': inline markup');
       }
       // Register the partial using the filename (without extension) or using
       // the style guide reference.
@@ -223,15 +268,33 @@ kssHandlebarsGenerator.generate = function(styleguide) {
       };
     }
 
-    // Accumulate all of the sections' first indexes
-    // in case they don't have a root element.
+    // Accumulate all of the sections' first indexes.
     currentRoot = sections[i].reference().split(/(?:\.|\ \-\ )/)[0];
     if (sectionRoots.indexOf(currentRoot) === -1) {
       sectionRoots.push(currentRoot);
     }
   }
 
-  console.log('...Generating style guide sections:');
+  // If a root element doesn't have an actual section, build one for it.
+  rootCount = sectionRoots.length;
+  key = false;
+  for (i = 0; i < rootCount; i += 1) {
+    currentRoot = styleguide.section(sectionRoots[i]);
+    if (currentRoot === false) {
+      key = sectionRoots[i];
+      styleguide.data.sections.push(new KssSection({
+        header: key,
+        reference: key
+      }));
+    }
+  }
+  if (key !== false) {
+    styleguide.init();
+  }
+
+  if (this.config.verbose) {
+    this.log('...Generating style guide pages:');
+  }
 
   // Now, group all of the sections by their root
   // reference, and make a page for each.
@@ -245,6 +308,8 @@ kssHandlebarsGenerator.generate = function(styleguide) {
   // Generate the homepage.
   childSections = [];
   this.generatePage(styleguide, childSections, 'styleguide.homepage', sectionRoots, partials);
+
+  cb(null);
 };
 
 /**
@@ -268,7 +333,9 @@ kssHandlebarsGenerator.generatePage = function(styleguide, sections, root, secti
   if (root === 'styleguide.homepage') {
     filename = 'index.html';
     filenameIframe = 'index-iframe.html';
-    console.log(' - homepage');
+    if (this.config.verbose) {
+      this.log(' - homepage');
+    }
     // Ensure homepageText is a non-false value.
     for (key in this.config.source) {
       if (!homepageText) {
@@ -284,28 +351,40 @@ kssHandlebarsGenerator.generatePage = function(styleguide, sections, root, secti
     }
     if (!homepageText) {
       homepageText = ' ';
-      console.log('   ...no homepage content found in ' + this.config.homepage + '.');
+      if (this.config.verbose) {
+        this.log('   ...no homepage content found in ' + this.config.homepage + '.');
+      } else {
+        this.log('WARNING: no homepage content found in ' + this.config.homepage + '.');
+      }
     }
   } else {
     filename = 'section-' + KssSection.prototype.encodeReferenceURI(root) + '.html';
     filenameIframe = 'section-' + KssSection.prototype.encodeReferenceURI(root) + '-iframe.html';
-    console.log(
-      ' - section ' + root + ' [',
-      styleguide.section(root) ? styleguide.section(root).header() : 'Unnamed',
-      ']'
-    );
+    if (this.config.verbose) {
+      this.log(
+        ' - section ' + root + ' [',
+        styleguide.section(root) ? styleguide.section(root).header() : 'Unnamed',
+        ']'
+      );
+    }
   }
   // Create the HTML to load the optional CSS and JS.
-  /*eslint-disable guard-for-in*/
   for (key in this.config.css) {
-    styles = styles + '<link rel="stylesheet" href="' + this.config.css[key] + '">\n';
+    if (this.config.css.hasOwnProperty(key)) {
+      if (this.config.copyCss) {
+        styles = styles + '<link rel="stylesheet" href="public/css/' + path.basename(this.config.css[key]) + '">\n';
+      } else {
+        styles = styles + '<link rel="stylesheet" href="' + this.config.css[key] + '">\n';
+      }
+    }
   }
   for (key in this.config.js) {
-    scripts = scripts + '<script src="' + this.config.js[key] + '"></script>\n';
+    if (this.config.js.hasOwnProperty(key)) {
+      scripts = scripts + '<script src="' + this.config.js[key] + '"></script>\n';
+    }
   }
-  /*eslint-enable guard-for-in*/
 
-  /*eslint-disable key-spacing*/
+  /* eslint-disable key-spacing */
   fs.writeFileSync(this.config.destination + '/' + filename,
     this.template({
       partials:     partials,
@@ -337,7 +416,7 @@ kssHandlebarsGenerator.generatePage = function(styleguide, sections, root, secti
       scripts:      scripts
     })
   );
-  /*eslint-enable key-spacing*/
+  /* eslint-enable key-spacing */
 };
 
 module.exports = kssHandlebarsGenerator;

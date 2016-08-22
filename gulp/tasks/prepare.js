@@ -7,7 +7,7 @@ import runSequence from 'run-sequence';
 
 // TODO run browserSync after all tasks finished
 const isDev = argv.dev || false;
-const devSequence = [/*'icon', */'copy', ['less', 'js']];
+const devSequence = [/*'icon', */'copy', ['less', 'js'], 'styleguide'];
 const buildSequence = ['clean', ...devSequence];
 const sequence = isDev ? devSequence : buildSequence;
 
