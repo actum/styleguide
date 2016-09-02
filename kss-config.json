@@ -1,0 +1,10 @@
+{
+	"source": "./boilerplate",
+	"destination": "./styleguide",
+	"template": "./dist",
+	"css": [
+		"../bootstrap.min.css"
+	],
+	"copyCss": true,
+	"js": []
+}
