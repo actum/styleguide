@@ -11,5 +11,4 @@ npm-debug.log
 /src/*.html
 
 # dist
-/dist
 /styleguide

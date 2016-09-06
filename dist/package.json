@@ -1,0 +1,12 @@
+{
+  "name": "kss-node-template",
+  "version": "2.1.0",
+  "description": "The default template for kss-node.",
+  "main": "template_config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "less": "^2.1.1"
+  }
+}

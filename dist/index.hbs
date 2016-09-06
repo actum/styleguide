@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{options.title}}</title>
+
+    <meta name="description" content="">
+    <meta name="generator" content="kss-node">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="public/css/style.min.css">
+</head>
+<body>
+    <div class="kss_main">
+        <div class="kss_u-sg-style">
+            <div class="kss_header">
+                <div class="kss_header__container">
+                    <h1 class="kss_header__title"><a href="/" class="kss_header__title-link">{{options.title}}</a></h1>
+                    <ul class="kss_nav" id="nav">
+                        <li class="kss_nav__item">
+                            <a href="./" class="kss_header__link">
+                                {{!-- <span class="kss_nav__ref">0</span> --}}
+                                <span class="kss_nav__name">Overview</span>
+                            </a>
+                        </li>
+                        {{#eachRoot}}
+                        <li class="kss_nav__item">
+                            <a href="section-{{referenceURI}}.html" class="kss_header__link">
+                                {{!-- <span class="kss_nav__ref">
+                                    {{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}
+                                </span> --}}
+                                <span class="kss_nav__name">{{header}}</span>
+                            </a>
+                            {{#ifReference ../rootName}}
+                            <ul class="kss_nav__submenu">
+                                {{#eachSection reference}}
+                                    {{#ifDepth 2}}
+                                    {{#consoleLog}}{{/consoleLog}}
+                                    <li class="kss_nav__submenu-item{{#if isActive}} is-active{{/if}}">
+                                        <a href="section-{{../referenceURI}}.html#kssref-{{referenceURI}}" class="kss_header__link kss_nav__submenu-link">
+                                            {{!-- <span class="kss_nav__ref">
+                                                {{#ifNumeric reference}}{{reference}}{{else}}{{autoincrement}}{{/ifNumeric}}
+                                            </span> --}}
+                                            <span class="kss_nav__name">{{header}}</span>
+                                        </a>
+                                    </li>
+                                    {{/ifDepth}}
+                                {{/eachSection}}
+                            </ul>
+                            {{/ifReference}}
+                        </li>
+                        {{/eachRoot}}
+                    </ul>
+                    <ul id="device">
+                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="320">Mobile</button></li>
+                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="540">Phablet</button></li>
+                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="768">Tablet</button></li>
+                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="1024">Desktop</button></li>
+                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="1440">Large</button></li>
+                        <li class="kss_header__item"><button type="button" class="kss_header__btn is-active">Full</button></li>
+                    </ul>
+                    <ul>
+                        <li class="kss_header__item"><button type="button" id="code" class="kss_header__btn">Code</button></li>
+                        {{!-- <li class="kss_header__item"><button type="button" class="kss_header__btn">Description</button></li> --}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <iframe src="{{filenameIframe}}" id="content" class="kss_content" onload="sg.iframeLoaded()"></iframe>
+    </div>
+    <script src="public/js/app.min.js"></script>
+    <script>
+        var config = {};
+        var sg = app.start(config);
+    </script>
+    <!-- Automatically generated using <a href="https://github.com/kss-node/kss-node">kss-node</a>
+. -->
+</body>
+</html>

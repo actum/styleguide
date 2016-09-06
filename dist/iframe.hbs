@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{options.title}}</title>
+
+    <meta name="description" content="">
+    <meta name="generator" content="kss-node">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="public/css/style.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css">
+    {{{styles}}}
+</head>
+<body>
+    <div class="kss_iframe">
+        {{#if homepage}}
+        <div id="kssref-0" class="kss_section kss_section--depth-0">{{{homepage}}}</div>
+        {{else}}
+
+  {{!
+    Display each section, in order.
+
+    The "root" element comes first in this loop, and can be detected using
+    the "#ifDepth 1" block as seen below.
+  }}
+  {{#eachSection rootName}}
+    {{#ifDepth 1}}
+        <div id="kssref-{{referenceURI}}" class="kss_section kss_section--depth-{{depth}}">
+            {{else}}
+            <div id="kssref-{{referenceURI}}" class="kss_section kss_section--depth-{{depth}}">
+                {{/ifDepth}}
+                <div class="kss_u-container kss_u-sg-style">
+                    <h{{depth}} class="kss_title kss_title--level-{{depth}}">
+                        <a class="kss_title__permalink" href="#kssref-{{referenceURI}}">
+                            <span class="kss_title__ref">
+                                {{#ifNumeric reference}}
+                                  {{reference}}
+                                {{else}}
+                                  {{autoincrement}}
+                                {{/ifNumeric}}
+                            </span>
+                            {{header}}
+                        </a>
+                    </h{{depth}}>
+                    {{#if parameters}}
+                    <ul class="kss-parameters">
+                        {{#eachParameter}}
+                        <li class="kss-parameters__item">
+                            <code class="kss-parameters__name">{{name}}</code>
+                            <div class="kss-parameters__description">{{{description}}}</div>
+                        </li>
+                        {{/eachParameter}}
+                    </ul>
+                    {{/if}}
+
+                    {{#if description}}
+                    <div class="kss_description">{{{description}}}</div>
+                    {{/if}}
+                </div>
+                {{#if markup}}
+                <div class="kss_example">
+                    {{#if modifiers}}
+                        {{#eachModifier}}
+                            <div class="kss_u-container kss_u-sg-style">
+                                <div class="kss_modifier">
+                                    <div class="kss_modifier__name">{{name}}</div>
+                                    <div class="kss_modifier__description">{{{description}}}</div>
+                                </div>
+                            </div>
+                            <div class="kss_example__item">{{{../../options.markupBefore}}}{{{markup}}}{{{../../options.markupAfter}}}</div>
+                        {{/eachModifier}}
+                    {{else}}
+                        <div class="kss_example__item">{{{../options.markupBefore}}}{{{markup}}}{{{../options.markupAfter}}}</div>
+                    {{/if}}
+                </div>
+
+                <div class="kss_u-container kss_u-sg-style">
+                    <div class="kss_markup">
+                        <button type="button" class="kss_markup__btn">Code</button>
+                        <div class="kss_markup__wrapper">
+                            <pre class="kss_markup__pre"><code class="language-html">{{markup}}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+            </div>
+        {{/eachSection}}
+    {{/if}}
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="public/js/kss.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
+    {{{scripts}}}
+
+    <!-- Automatically generated using <a href="https://github.com/kss-node/kss-node">kss-node</a>
+. -->
+</body>
+</html>
