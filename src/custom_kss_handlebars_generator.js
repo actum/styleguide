@@ -12,8 +12,8 @@
  * @module kss/generator/handlebars
  */
 
-var KssGenerator = require('../node_modules/kss/generator/kss_generator.js'),
-  KssSection = require('../node_modules/kss/lib/kss_section.js'),
+var KssGenerator = require('kss/generator/kss_generator.js'),
+  KssSection = require('kss/lib/kss_section.js'),
   fs = require('fs'),
   fse = require('fs-extra'),
   glob = require('glob'),
@@ -96,7 +96,7 @@ kssHandlebarsGenerator.init = function(config, cb) {
   this.Handlebars = require('handlebars');
 
   // Load the standard Handlebars helpers.
-  require('../node_modules/kss/generator/handlebars/helpers.js').register(this.Handlebars, this.config);
+  require('kss/generator/handlebars/helpers.js').register(this.Handlebars, this.config);
 
   if (this.config.verbose) {
     this.log('');
