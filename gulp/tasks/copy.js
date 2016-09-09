@@ -1,8 +1,9 @@
-import gulp from 'gulp';
-import merge from 'merge-stream';
-import config from '../config';
+const config = require('../config');
+const gulp = require('gulp');
+const merge = require('merge-stream');
 
-const { src, dist } = config.paths;
+const dist = config.paths.dist;
+const src = config.paths.src;
 
 gulp.task('copy', () => {
     const tpl = gulp.src(src.html)

@@ -1,13 +1,13 @@
-export default {
+module.exports = {
+    port: 5500,
     paths: {
-        gulpfile: './gulpfile.babel.js',
+        gulpfile: './gulpfile.js',
         src: {
             base: './src',
-            bower: './src/bower',
-            less: {
-                base: './src/less',
-                entry: './src/less/main.less',
-                all: './src/less/**/*.less',
+            styles: {
+                base: './src/styles',
+                entry: './src/styles/main.scss',
+                all: './src/styles/**/*.scss',
                 dest: './styleguide/public'
             },
             app: {
@@ -38,7 +38,7 @@ export default {
             html: './dist'
         },
         boilerplate: {
-            all: './boilerplate/**/*.less'
+            all: './boilerplate/**/*.scss'
         },
         styleguide: {
             base: './styleguide',
@@ -56,4 +56,4 @@ export default {
             min: 'app.min.js'
         }
     }
-}
+};

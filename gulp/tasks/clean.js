@@ -1,8 +1,9 @@
-import gulp from 'gulp';
-import del from 'del';
-import config from '../config';
+const config = require('../config');
+const del = require('del');
+const gulp = require('gulp');
 
-const { dist, styleguide } = config.paths;
+const dist = config.paths.dist;
+const styleguide = config.paths.styleguide;
 const buildedFiles = [dist.css, dist.js, styleguide.base];
 
 gulp.task('clean', () => del(buildedFiles));

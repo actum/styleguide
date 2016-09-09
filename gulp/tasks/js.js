@@ -1,31 +1,29 @@
-import gulp from 'gulp';
-import { argv } from 'yargs';
-import rename from 'gulp-rename';
-import browserify from 'browserify';
-import watchify from 'watchify';
-import babelify from 'babelify';
-import uglifyify from 'uglifyify';
-import envify from 'envify';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
-import sourcemaps from 'gulp-sourcemaps';
-import uglify from 'gulp-uglify';
-import gutil from 'gulp-util';
-import browserSync from 'browser-sync';
-import config from '../config';
+const babelify = require('babelify');
+const browserify = require('browserify');
+const browserSync = require('browser-sync');
+const buffer = require('vinyl-buffer');
+const config = require('../config');
+const envify = require('envify');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const rename = require('gulp-rename');
+const source = require('vinyl-source-stream');
+const uglify = require('gulp-uglify');
+const uglifyify = require('uglifyify');
+const watchify = require('watchify');
 
-const { src, dist, styleguide } = config.paths;
+const dist = config.paths.dist;
 const names = config.names;
-const isDev = argv.dev || false;
+const src = config.paths.src;
+const styleguide = config.paths.styleguide;
 
 function bundle() {
     const transforms = [envify, babelify];
     const opts = {
         entries: src.app.entry,
-        debug: isDev,
         transform: [...transforms, uglifyify]
     };
-    const bundler = isDev ? watchify(browserify(Object.assign({}, watchify.args, opts))) : browserify(opts);
+    const bundler = watchify(browserify(Object.assign({}, watchify.args, opts)));
     function rebundle() {
         return bundler.bundle()
             .on('error', e => gutil.log(gutil.colors.red(e.name) + e.message.substr(e.message.indexOf(': ') + 1)))

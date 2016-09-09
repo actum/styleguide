@@ -1,12 +1,11 @@
-import gulp from 'gulp';
-import { argv } from 'yargs';
-import svgstore from 'gulp-svgstore';
-import svgmin from 'gulp-svgmin';
-import path from 'path';
-import config from '../config';
+const config = require('../config');
+const gulp = require('gulp');
+const path = require('path');
+const svgmin = require('gulp-svgmin');
+const svgstore = require('gulp-svgstore');
 
-const { src, dist } = config.paths;
-const isDev = argv.dev || false;
+const dist = config.paths.dist;
+const src = config.paths.src;
 
 gulp.task('icon', () => {
     return gulp.src(src.icon.entry)
@@ -24,7 +23,6 @@ gulp.task('icon', () => {
         .pipe(svgstore({
             inlineSvg: true
         }))
-        .pipe(gulp.dest(isDev ? src.icon.dest : dist.icon));
-        // TODO run 'tpl' task and 'browserSync' after icon task
-        // to include svg.svg file into all templates
+        .pipe(gulp.dest(src.icon.dest));
+        // TODO adjust icons for styleguide structure
 });

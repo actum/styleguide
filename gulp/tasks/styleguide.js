@@ -1,13 +1,8 @@
-import gulp from 'gulp';
-import { argv } from 'yargs';
-import config from '../config';
-import kss from 'kss';
-import browserSync from 'browser-sync';
-import kssConfig from '../../kss-config.json';
-
-const { src, dist, styleguide } = config.paths;
-const names = config.names;
-const isDev = argv.dev || false;
+const browserSync = require('browser-sync');
+const config = require('../config');
+const gulp = require('gulp');
+const kss = require('kss');
+const kssConfig = require('../../kss-config.json');
 
 gulp.task('styleguide', () => {
     kss(kssConfig, () => {
