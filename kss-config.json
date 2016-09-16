@@ -6,5 +6,8 @@
 		"../bootstrap.min.css"
 	],
 	"copyCss": true,
-	"js": []
+	"js": [
+        "../bootstrap.min.js"
+    ],
+    "copyJs": true
 }

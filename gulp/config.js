@@ -1,5 +1,5 @@
 module.exports = {
-    port: 5500,
+    port: 8771,
     paths: {
         gulpfile: './gulpfile.js',
         src: {

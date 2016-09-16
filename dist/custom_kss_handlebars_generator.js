@@ -67,6 +67,11 @@ var kssHandlebarsGenerator = new KssGenerator('2.1', {
     multiple: false,
     describe: 'Copy static CSS file into styleguide destination public folder',
     default: false
+  },
+  copyJs: {
+    multiple: false,
+    describe: 'Copy static JS file into styleguide destination public folder',
+    default: false
   }
 });
 
@@ -132,12 +137,26 @@ kssHandlebarsGenerator.init = function(config, cb) {
     // empty
   }
 
-  // Optionally, copy the css files to the template's "public" folder.
+  // Optionally, copy the css and js files to the template's "public" folder.
+  // TODO copy all files in Array
   if (this.config.copyCss) {
     try {
       fse.copy(
         path.join(this.config.destination, this.config.css[0]),
         this.config.destination + '/public/css/' + path.basename(this.config.css[0]),
+        {
+          clobber: true
+        }
+      );
+    } catch (e) {
+      // empty
+    }
+  }
+  if (this.config.copyJs) {
+    try {
+      fse.copy(
+        path.join(this.config.destination, this.config.js[0]),
+        this.config.destination + '/public/js/' + path.basename(this.config.js[0]),
         {
           clobber: true
         }
@@ -380,7 +399,11 @@ kssHandlebarsGenerator.generatePage = function(styleguide, sections, root, secti
   }
   for (key in this.config.js) {
     if (this.config.js.hasOwnProperty(key)) {
-      scripts = scripts + '<script src="' + this.config.js[key] + '"></script>\n';
+      if (this.config.copyJs) {
+        scripts = scripts + '<script src="public/js/' + path.basename(this.config.js[key]) + '">\n';
+      } else {
+        scripts = scripts + '<script src="' + this.config.js[key] + '"></script>\n';
+      }
     }
   }
 
