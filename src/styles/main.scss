@@ -91,7 +91,10 @@ body {
     }
 
     &u-sg-style {
-        @import '../../node_modules/css-reset-and-normalize/css/reset-and-normalize';
+        all: initial;
+        * {
+            all: unset;
+        }
 
         &,
         button {
