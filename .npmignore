@@ -1,0 +1,13 @@
+*.sublime-*
+
+# npm
+/node_modules
+npm-debug.log
+
+# app
+/boilerplate
+/gulp
+/src
+
+# dist
+/styleguide
