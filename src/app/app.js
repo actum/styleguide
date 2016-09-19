@@ -24,4 +24,4 @@ function init(module, container, ...args) {
     }
 }
 
-window.app = app;
+window.sg = app;
