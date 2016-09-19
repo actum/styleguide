@@ -53,7 +53,7 @@ module.exports = {
         },
         js: {
             src: 'app.js',
-            min: 'app.min.js'
+            min: 'sg.min.js'
         }
     }
 };
