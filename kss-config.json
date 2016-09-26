@@ -12,5 +12,6 @@
     "copyJs": true,
 	"custom": [
 		"wrap"
-	]
+	],
+	"script": ""
 }

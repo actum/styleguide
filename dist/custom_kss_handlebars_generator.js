@@ -72,6 +72,12 @@ var kssHandlebarsGenerator = new KssGenerator('2.1', {
     multiple: false,
     describe: 'Copy static JS file into styleguide destination public folder',
     default: false
+  },
+  script: {
+    string: true,
+    multiple: false,
+    describe: 'Custom inline script on the bottom of the inner iframe page',
+    default: false
   }
 });
 
@@ -400,7 +406,7 @@ kssHandlebarsGenerator.generatePage = function(styleguide, sections, root, secti
   for (key in this.config.js) {
     if (this.config.js.hasOwnProperty(key)) {
       if (this.config.copyJs) {
-        scripts = scripts + '<script src="public/js/' + path.basename(this.config.js[key]) + '">\n';
+        scripts = scripts + '<script src="public/js/' + path.basename(this.config.js[key]) + '"></script>\n';
       } else {
         scripts = scripts + '<script src="' + this.config.js[key] + '"></script>\n';
       }
