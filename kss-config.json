@@ -9,5 +9,8 @@
 	"js": [
         "../bootstrap.min.js"
     ],
-    "copyJs": true
+    "copyJs": true,
+	"custom": [
+		"wrap"
+	]
 }
