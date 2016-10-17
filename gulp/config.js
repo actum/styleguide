@@ -49,11 +49,11 @@ module.exports = {
     names: {
         css: {
             src: 'style.css',
-            min: 'style.min.css'
+            min: 'sg-style.min.css'
         },
         js: {
             src: 'app.js',
-            min: 'sg.min.js'
+            min: 'sg-app.min.js'
         }
     }
 };
