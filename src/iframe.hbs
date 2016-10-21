@@ -8,14 +8,20 @@
     <meta name="generator" content="kss-node">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="public/css/sg-style.min.css">
+    <link rel="stylesheet" href="sg/css/sg-style.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css">
     {{{styles}}}
 </head>
 <body>
     <div class="kss_iframe">
         {{#if homepage}}
-        <div id="kssref-0" class="kss_section kss_section--depth-0">{{{homepage}}}</div>
+            <div id="kssref-0" class="kss_section kss_section--depth-0">
+                <div class="kss_text-container">
+                    <div class="kss_u-sg-style">
+                        {{{homepage}}}
+                    </div>
+                </div>
+            </div>
         {{else}}
 
   {{!
@@ -101,7 +107,7 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script src="public/js/kss.js"></script>
+    <script src="sg/js/kss.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
     {{{scripts}}}
     <script>{{{options.script}}}</script>

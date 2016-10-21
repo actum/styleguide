@@ -8,13 +8,13 @@ module.exports = {
                 base: './src/styles',
                 entry: './src/styles/main.scss',
                 all: './src/styles/**/*.scss',
-                dest: './styleguide/public'
+                dest: './styleguide/sg'
             },
             app: {
                 base: './src/app',
                 entry: './src/app/app.js',
                 all: './src/app/**/*.js',
-                dest: './styleguide/public'
+                dest: './styleguide/sg'
             },
             icon: {
                 entry: './src/gfx/svg/*.svg',
@@ -27,14 +27,14 @@ module.exports = {
                     './src/package.json',
                     './src/template_config.js'
                 ],
-                js: './src/public/kss.js'
+                js: './src/sg/kss.js'
             }
         },
         dist: {
             base: './dist',
-            css: './dist/public/css',
-            js: './dist/public/js',
-            icon: './dist/public/gfx/icon',
+            css: './dist/sg/css',
+            js: './dist/sg/js',
+            icon: './dist/sg/gfx/icon',
             html: './dist'
         },
         boilerplate: {
@@ -42,8 +42,8 @@ module.exports = {
         },
         styleguide: {
             base: './styleguide',
-            css: './styleguide/public/css',
-            js: './styleguide/public/js'
+            css: './styleguide/sg/css',
+            js: './styleguide/sg/js'
         }
     },
     names: {

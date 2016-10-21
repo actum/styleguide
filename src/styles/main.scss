@@ -32,6 +32,12 @@ body {
         padding-top: 30px;
     }
 
+    &text-container {
+        max-width: 800px;
+        min-height: calc(100vh - 42px);
+        margin: 0 auto;
+    }
+
     &example {
         margin-bottom: 20px;
     }

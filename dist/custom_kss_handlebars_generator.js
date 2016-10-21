@@ -63,16 +63,6 @@ var kssHandlebarsGenerator = new KssGenerator('2.1', {
     describe: 'Markup wrapper',
     default: '</div>'
   },
-  copyCss: {
-    multiple: false,
-    describe: 'Copy static CSS file into styleguide destination public folder',
-    default: false
-  },
-  copyJs: {
-    multiple: false,
-    describe: 'Copy static JS file into styleguide destination public folder',
-    default: false
-  },
   script: {
     string: true,
     multiple: false,
@@ -124,16 +114,16 @@ kssHandlebarsGenerator.init = function(config, cb) {
 
   // Create a new destination directory.
   try {
-    mkdirp.sync(this.config.destination + '/public');
+    mkdirp.sync(this.config.destination + '/sg');
   } catch (e) {
     // empty
   }
 
-  // Optionally, copy the contents of the template's "public" folder.
+  // Optionally, copy the contents of the template's "sg" folder.
   try {
     wrench.copyDirSyncRecursive(
-      this.config.template + '/public',
-      this.config.destination + '/public',
+      this.config.template + '/sg',
+      this.config.destination + '/sg',
       {
         forceDelete: true,
         excludeHiddenUnix: true
@@ -141,35 +131,6 @@ kssHandlebarsGenerator.init = function(config, cb) {
     );
   } catch (e) {
     // empty
-  }
-
-  // Optionally, copy the css and js files to the template's "public" folder.
-  // TODO copy all files in Array
-  if (this.config.copyCss) {
-    try {
-      fse.copy(
-        path.join(this.config.destination, this.config.css[0]),
-        this.config.destination + '/public/css/' + path.basename(this.config.css[0]),
-        {
-          clobber: true
-        }
-      );
-    } catch (e) {
-      // empty
-    }
-  }
-  if (this.config.copyJs) {
-    try {
-      fse.copy(
-        path.join(this.config.destination, this.config.js[0]),
-        this.config.destination + '/public/js/' + path.basename(this.config.js[0]),
-        {
-          clobber: true
-        }
-      );
-    } catch (e) {
-      // empty
-    }
   }
 
   // Load Handlebars helpers.
@@ -396,20 +357,12 @@ kssHandlebarsGenerator.generatePage = function(styleguide, sections, root, secti
   // Create the HTML to load the optional CSS and JS.
   for (key in this.config.css) {
     if (this.config.css.hasOwnProperty(key)) {
-      if (this.config.copyCss) {
-        styles = styles + '<link rel="stylesheet" href="public/css/' + path.basename(this.config.css[key]) + '">\n';
-      } else {
-        styles = styles + '<link rel="stylesheet" href="' + this.config.css[key] + '">\n';
-      }
+      styles = styles + '<link rel="stylesheet" href="' + this.config.css[key] + '">\n';
     }
   }
   for (key in this.config.js) {
     if (this.config.js.hasOwnProperty(key)) {
-      if (this.config.copyJs) {
-        scripts = scripts + '<script src="public/js/' + path.basename(this.config.js[key]) + '"></script>\n';
-      } else {
-        scripts = scripts + '<script src="' + this.config.js[key] + '"></script>\n';
-      }
+      scripts = scripts + '<script src="' + this.config.js[key] + '"></script>\n';
     }
   }
 
