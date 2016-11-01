@@ -78,7 +78,7 @@
                             {{#if ../wrap}}
                                 <div class="kss_example__item">{{{markup}}}</div>
                             {{else}}
-                                <div class="kss_example__item">{{{../../options.markupBefore}}}{{{markup}}}{{{../../options.markupAfter}}}</div>
+                                <div class="kss_example__item">{{{../../../../../options.markupBefore}}}{{{markup}}}{{{../../../../../options.markupAfter}}}</div>
                             {{/if}}
                         {{/eachModifier}}
                     {{else}}
@@ -86,7 +86,7 @@
                         {{#if wrap}}
                             <div class="kss_example__item">{{{markup}}}</div>
                         {{else}}
-                            <div class="kss_example__item">{{{../options.markupBefore}}}{{{markup}}}{{{../options.markupAfter}}}</div>
+                            <div class="kss_example__item">{{{../../../../options.markupBefore}}}{{{markup}}}{{{../../../../options.markupAfter}}}</div>
                         {{/if}}
                     {{/if}}
                 </div>
