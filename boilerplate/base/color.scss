@@ -7,92 +7,83 @@
  */
 
 /**
- * Brand primary
+ * Primary Colors
  *
- * Used for links, backgrounds
+ * Used for buttons, links, etc.
  *
  * markup:
- * <div style="background: #337ab7;" class="kss_sg-color"><span class="kss_sg-color__name">@brand-primary - #337ab7</span></div>
+    <div class="row">
+        <div class="col-sm-2">
+            <div style="background: #337ab7" class="kss_sg-color">
+            </div>
+            <p class="kss_sg-color__name">$color-primary
+                <span class="kss_sg-color__code">#337ab7</span>
+            </p>
+        </div>
+        <div class="col-sm-2">
+            <div style="background: #5cb85c" class="kss_sg-color">
+            </div>
+            <p class="kss_sg-color__name">$color-success
+                <span class="kss_sg-color__code">#5cb85c</span>
+            </p>
+        </div>
+        <div class="col-sm-2">
+            <div style="background: #5bc0de" class="kss_sg-color">
+            </div>
+            <p class="kss_sg-color__name">$color-info
+                <span class="kss_sg-color__code">#5bc0de</span>
+            </p>
+        </div>
+        <div class="col-sm-2">
+            <div style="background: #f0ad4e" class="kss_sg-color">
+            </div>
+            <p class="kss_sg-color__name">$color-warning
+                <span class="kss_sg-color__code">#f0ad4e</span>
+            </p>
+        </div>
+        <div class="col-sm-2">
+            <div style="background: #d9534f" class="kss_sg-color">
+            </div>
+            <p class="kss_sg-color__name">$color-danger
+                <span class="kss_sg-color__code">#d9534f</span>
+            </p>
+        </div>
+    </div>
  *
  * weight: -10
- * 
- * Styleguide Base - Color - Brand primary
+ *
+ * Styleguide Base - Color - Primary Colors
  */
 
 /**
- * Brand success
+ * Secondary Colors
  *
- * Used for success backgrounds
- *
- * markup:
- * <div style="background: #5cb85c;" class="kss_sg-color"><span class="kss_sg-color__name">@brand-success - #5cb85c</span></div>
- *
- * Styleguide Base - Color - Brand success
- */
-
-/**
- * Brand info
- *
- * Used for info backgrounds
+ * Used for backgrounds etc.
  *
  * markup:
- * <div style="background: #5bc0de;" class="kss_sg-color"><span class="kss_sg-color__name">@brand-info - #5bc0de</span></div>
+ <div class="row">
+     <div class="col-sm-2">
+         <div style="background: #333" class="kss_sg-color">
+         </div>
+         <p class="kss_sg-color__name">$color-gray-dark
+             <span class="kss_sg-color__code">#333</span>
+         </p>
+     </div>
+     <div class="col-sm-2">
+         <div style="background: #777" class="kss_sg-color">
+         </div>
+         <p class="kss_sg-color__name">$color-gray
+             <span class="kss_sg-color__code">#777</span>
+         </p>
+     </div>
+     <div class="col-sm-2">
+         <div style="background: #eee" class="kss_sg-color">
+         </div>
+         <p class="kss_sg-color__name">$color-gray-light
+             <span class="kss_sg-color__code">#eee</span>
+         </p>
+     </div>
+ </div>
  *
- * Styleguide Base - Color - Brand info
- */
-
-/**
- * Brand warning
- *
- * Used for warning backgrounds
- *
- * markup:
- * <div style="background: #f0ad4e;" class="kss_sg-color"><span class="kss_sg-color__name">@brand-warning - #f0ad4e</span></div>
- *
- * Styleguide Base - Color - Brand warning
- */
-
-/**
- * Brand danger
- *
- * Used for danger backgrounds
- *
- * markup:
- * <div style="background: #d9534f;" class="kss_sg-color"><span class="kss_sg-color__name">@brand-danger - #d9534f</span></div>
- *
- * Styleguide Base - Color - Brand danger
- */
-
-/**
- * Gray dark
- *
- * Used for global text color
- *
- * markup:
- * <div style="background: #333;" class="kss_sg-color"><span class="kss_sg-color__name">@gray-dark - #333</span></div>
- *
- * Styleguide Base - Color - Gray dark
- */
-
-/**
- * Gray light
- *
- * Used for disabled text
- *
- * markup:
- * <div style="background: #777;" class="kss_sg-color"><span class="kss_sg-color__name">@gray-light - #777</span></div>
- *
- * Styleguide Base - Color - Gray light
- */
-
-
-/**
- * Gray lighter
- *
- * Used for backgrounds
- *
- * markup:
- * <div style="background: #eee;" class="kss_sg-color"><span class="kss_sg-color__name">@gray-lighter - #eee</span></div>
- *
- * Styleguide Base - Color - Gray lighter
+ * Styleguide Base - Color - Secondary Colors
  */
