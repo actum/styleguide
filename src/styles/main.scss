@@ -85,14 +85,19 @@ body {
     }
 
     &sg-color {
+        height: 120px;
         padding: 10px;
         text-align: center;
 
         &__name {
+            height: 50px;
             padding: 5px 10px;
-            border-radius: 10px;
-            background: rgba(0,0,0,.5);
-            color: rgba(255,255,255,.5);
+            background: #f1eded;
+            color: #000;
+        }
+
+        &__code {
+            display: block;
         }
     }
 
