@@ -25,19 +25,12 @@ body {
     }
 
     &iframe {
+        padding-top: 30px;
         background: #fff;
     }
 
     &section {
-        padding-top: 30px;
-
-        &--depth-2 {
-            padding-top: 10px;
-        }
-
-        &--depth-3 {
-            padding-top: 5px;
-        }
+        margin-bottom: 30px;
     }
 
     &text-container {
@@ -91,6 +84,7 @@ body {
 
         &__pre {
             margin-top: 0 !important;
+            border: 0;
         }
 
         @media (min-width: $screen-md-min) {
