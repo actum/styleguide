@@ -93,6 +93,7 @@ body {
     }
 
     &sg-color {
+        height: 120px;
         padding: 10px;
         margin-right: 20px;
         margin-bottom: 20px;
@@ -106,6 +107,7 @@ body {
         }
 
         &__name {
+            height: 50px;
             padding: 5px 10px;
             font-size: 14px;
             color: #000;
