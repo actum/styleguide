@@ -1,17 +1,17 @@
 {
-	"source": "./boilerplate",
-	"destination": "./styleguide",
-	"template": "./dist",
-	"homepage": "../styleguide.md",
-	"css": [
-		"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-	],
-	"js": [
-		"https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js",
+    "source": "./boilerplate",
+    "destination": "./styleguide",
+    "template": "./dist",
+    "homepage": "../styleguide.md",
+    "css": [
+        "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    ],
+    "js": [
+        "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js",
         "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
     ],
-	"custom": [
-		"wrap"
-	],
-	"script": ""
+    "custom": [
+        "wrap"
+    ],
+    "script": ""
 }
