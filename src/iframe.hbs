@@ -65,18 +65,29 @@
                     {{/if}}
                 </div>
                 {{#if markup}}
-                <div class="kss_example">
+                <div class="kss_example {{#if color}}kss_example--color{{/if}}">
                     {{#if modifiers}}
                         {{#eachModifier}}
-                            <div class="kss_u-container kss_u-sg-style">
-                                <div class="kss_modifier">
-                                    <div class="kss_modifier__name">{{name}}</div>
-                                    <div class="kss_modifier__description">{{{description}}}</div>
+                            {{#if ../color}}
+                                <div class="kss_sg-color col-sm-2">
+                                    {{{markup}}}
+                                    <div class="kss_sg-color__name">{{{name}}}
+                                        <span class="kss_sg-color__code">{{{description}}}</span>
+                                    </div>
                                 </div>
-                            </div>
+                            {{else}}
+                                <div class="kss_u-container kss_u-sg-style">
+                                    <div class="kss_modifier">
+                                        <div class="kss_modifier__name">{{name}}</div>
+                                        <div class="kss_modifier__description">{{{description}}}</div>
+                                    </div>
+                                </div>
+                            {{/if}}
+
                             {{! if wrap is defined it should not be rendered, value ie 'none' }}
                             {{#if ../wrap}}
                                 <div class="kss_example__item">{{{markup}}}</div>
+                            {{else if ../color}}
                             {{else}}
                                 <div class="kss_example__item">{{{../../options.markupBefore}}}{{{markup}}}{{{../../options.markupAfter}}}</div>
                             {{/if}}

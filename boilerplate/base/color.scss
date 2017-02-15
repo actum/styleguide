@@ -7,83 +7,38 @@
  */
 
 /**
- * Primary Colors
+ * Brand primary
  *
- * Used for buttons, links, etc.
+ * Used for call to action elements like buttons, links, etc.
+ *
+ * #337ab7 - $color-primary
+ * #5bc0de - $color-success
+ * #f0ad4e - $color-warning
+ * #d9534f - $color-danger
+ *
+ * color: true
  *
  * markup:
-    <div class="row">
-        <div class="col-sm-2">
-            <div style="background: #337ab7" class="kss_sg-color">
-            </div>
-            <p class="kss_sg-color__name">$color-primary
-                <span class="kss_sg-color__code">#337ab7</span>
-            </p>
-        </div>
-        <div class="col-sm-2">
-            <div style="background: #5cb85c" class="kss_sg-color">
-            </div>
-            <p class="kss_sg-color__name">$color-success
-                <span class="kss_sg-color__code">#5cb85c</span>
-            </p>
-        </div>
-        <div class="col-sm-2">
-            <div style="background: #5bc0de" class="kss_sg-color">
-            </div>
-            <p class="kss_sg-color__name">$color-info
-                <span class="kss_sg-color__code">#5bc0de</span>
-            </p>
-        </div>
-        <div class="col-sm-2">
-            <div style="background: #f0ad4e" class="kss_sg-color">
-            </div>
-            <p class="kss_sg-color__name">$color-warning
-                <span class="kss_sg-color__code">#f0ad4e</span>
-            </p>
-        </div>
-        <div class="col-sm-2">
-            <div style="background: #d9534f" class="kss_sg-color">
-            </div>
-            <p class="kss_sg-color__name">$color-danger
-                <span class="kss_sg-color__code">#d9534f</span>
-            </p>
-        </div>
-    </div>
+    <div style="background: {{modifier_class}}" class="kss_sg-color__item"></div>
  *
  * weight: -10
  *
- * Styleguide Base - Color - Primary Colors
+ * Styleguide Base - Color - Brand primary
  */
 
 /**
  * Secondary Colors
  *
- * Used for backgrounds etc.
+ * Used for backgrounds, shadows etc.
+ *
+ * #333 - $color-gray--dark
+ * #777 - $color-gray
+ * #eee - $color-gray--light
+ *
+ * color: true
  *
  * markup:
- <div class="row">
-     <div class="col-sm-2">
-         <div style="background: #333" class="kss_sg-color">
-         </div>
-         <p class="kss_sg-color__name">$color-gray-dark
-             <span class="kss_sg-color__code">#333</span>
-         </p>
-     </div>
-     <div class="col-sm-2">
-         <div style="background: #777" class="kss_sg-color">
-         </div>
-         <p class="kss_sg-color__name">$color-gray
-             <span class="kss_sg-color__code">#777</span>
-         </p>
-     </div>
-     <div class="col-sm-2">
-         <div style="background: #eee" class="kss_sg-color">
-         </div>
-         <p class="kss_sg-color__name">$color-gray-light
-             <span class="kss_sg-color__code">#eee</span>
-         </p>
-     </div>
- </div>
+    <div style="background: {{modifier_class}}" class="kss_sg-color__item"></div>
  *
  * Styleguide Base - Color - Secondary Colors
  */
