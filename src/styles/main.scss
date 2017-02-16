@@ -44,8 +44,27 @@ body {
 
         &--color {
             display: flex;
-            max-width: 1140px;
+            flex-wrap: wrap;
             margin: 0 auto;
+            padding-left: 15px;
+            padding-right: 15px;
+
+            @media (min-width: 576px) {
+                width: 540px;
+                max-width: 100%;
+            }
+            @media (min-width: 768px) {
+                width: 720px;
+                max-width: 100%;
+            }
+            @media (min-width: 992px) {
+                width: 960px;
+                max-width: 100%;
+            }
+            @media (min-width: 1200px) {
+                width: 1140px;
+                max-width: 100%;
+            }
         }
     }
 
@@ -93,7 +112,9 @@ body {
     }
 
     &sg-color {
-        height: 120px;
+        flex: 1 0 auto;
+        width: auto;
+        min-height: 120px;
         padding: 10px;
         margin-right: 20px;
         margin-bottom: 20px;
