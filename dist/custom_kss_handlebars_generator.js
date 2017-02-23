@@ -68,6 +68,18 @@ var kssHandlebarsGenerator = new KssGenerator('2.1', {
     multiple: false,
     describe: 'Custom inline script on the bottom of the inner iframe page',
     default: false
+  },
+  deviceWidths: {
+    group: 'Style guide:',
+    string: true,
+    describe: 'Custom devices widths',
+    default: [320, 576, 768, 992, 1200]
+  },
+  deviceNames: {
+    group: 'Style guide:',
+    string: true,
+    describe: 'Custom devices names',
+    default: ["Mobile", "Phablet", "Tablet", "Desktop", "Large"]
   }
 });
 

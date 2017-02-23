@@ -51,11 +51,9 @@
                         {{/eachRoot}}
                     </ul>
                     <ul id="device">
-                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="320">Mobile</button></li>
-                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="540">Phablet</button></li>
-                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="768">Tablet</button></li>
-                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="1024">Desktop</button></li>
-                        <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="1440">Large</button></li>
+                        {{#each options.deviceWidths}}
+                          <li class="kss_header__item"><button type="button" class="kss_header__btn" data-width="{{this}}">{{lookup ../options.deviceNames @index}}</button></li>
+                        {{/each}}
                         <li class="kss_header__item"><button type="button" class="kss_header__btn is-active">Full</button></li>
                     </ul>
                     <ul>
