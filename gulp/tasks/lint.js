@@ -1,7 +1,6 @@
 const config = require('../config');
 const eslint = require('gulp-eslint');
 const gulp = require('gulp');
-const gulpif = require('gulp-if');
 
 const gulpfile = config.paths.gulpfile;
 const src = config.paths.src;
