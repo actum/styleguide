@@ -4,7 +4,9 @@
   "description": "Styleguide generator",
   "scripts": {
     "kss": "kss-node --config kss-config.json",
-    "kss-clone": "kss-node --clone"
+    "kss-clone": "kss-node --clone",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Jan Panschab <jan.panschab@gmail.com>",
   "license": "MIT",
@@ -102,6 +104,8 @@
   },
   "dependencies": {
     "handlebars": "^4.0.10",
-    "kss": "^2.4.0"
-  }
+    "kss": "^2.4.0",
+    "snyk": "^1.38.1"
+  },
+  "snyk": true
 }
