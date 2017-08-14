@@ -6,7 +6,6 @@ const cssnano = require('cssnano');
 const combiner = require('stream-combiner2');
 const flexbugsFixes = require('postcss-flexbugs-fixes');
 const gulp = require('gulp');
-const gulpif = require('gulp-if');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass');
